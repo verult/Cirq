@@ -117,7 +117,7 @@ class EigenGate(raw_types.Gate):
         method with a differing signature.
         """
         # pylint: disable=unexpected-keyword-arg
-        if self._global_shift == 0:
+        if self._global_shift == 0: BRING THE SYNTAX ERROR
             return type(self)(exponent=exponent)
         return type(self)(
             exponent=exponent,
