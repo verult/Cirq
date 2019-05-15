@@ -160,11 +160,11 @@ branch-protection:
           branches:
             master:
               protect: true
-          required_status_checks:
-            contexts:
-            - "Travis CI - Pull Request"
-            # TODO uncomment
-            #- cla/google
+          # TODO uncomment
+          # required_status_checks:
+          #   contexts:
+          #   - "Travis CI - Pull Request"
+          #   - cla/google
 
             
 tide:
