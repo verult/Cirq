@@ -14,7 +14,7 @@ presubmits:
         - pip install --upgrade pip setuptools wheel;
           cat dev_tools/conf/pip-list-dev-tools.txt | grep mypy | xargs pip install;
           check/mypy
-  # TODO uncomment after test is fixed 
+  # TODO uncomment after test is fixed
   # - name: pylint
   #   decorate: true
   #   always_run: true

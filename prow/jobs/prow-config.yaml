@@ -1,4 +1,4 @@
-### Jobs for updating Prow config 
+### Jobs for updating Prow config
 
 presubmits:
   verult-prowbot/Cirq:
