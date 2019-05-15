@@ -54,18 +54,19 @@ presubmits:
         - pip install --upgrade pip setuptools wheel;
           cat dev_tools/conf/pip-list-dev-tools.txt | grep mypy | xargs pip install;
           check/mypy
-  - name: pylint
-    decorate: true
-    always_run: true
-    skip_report: false
-    spec:
-      containers:
-      - image: python:3.5.2
-        command: ["/bin/sh", "-c"]
-        args:
-        - pip install --upgrade pip setuptools wheel;
-          cat dev_tools/conf/pip-list-dev-tools.txt | grep "pylint\|astroid" | grep -v "#" | xargs pip install;
-          check/pylint
+  # TODO uncomment after test is fixed
+  # - name: pylint
+  #   decorate: true
+  #   always_run: true
+  #   skip_report: false
+  #   spec:
+  #     containers:
+  #     - image: python:3.5.2
+  #       command: ["/bin/sh", "-c"]
+  #       args:
+  #       - pip install --upgrade pip setuptools wheel;
+  #         cat dev_tools/conf/pip-list-dev-tools.txt | grep "pylint\|astroid" | grep -v "#" | xargs pip install;
+  #         check/pylint
   - name: format
     decorate: true
     always_run: true
@@ -78,33 +79,35 @@ presubmits:
         - pip install --upgrade pip setuptools wheel;
           cat dev_tools/conf/pip-list-dev-tools.txt | grep yapf | xargs pip install;
           check/format-incremental
-  - name: pytest-and-incremental-coverage
-    decorate: true
-    always_run: true
-    skip_report: false
-    spec:
-      containers:
-      - image: python:3.5.2
-        command: ["/bin/sh", "-c"]
-        args:
-        - pip install --upgrade pip setuptools wheel;
-          pip install -r requirements.txt;
-          pip install -r cirq/contrib/contrib-requirements.txt;
-          pip install -r dev_tools/conf/pip-list-dev-tools.txt;
-          check/pytest-and-incremental-coverage master
-  - name: pytest-without-contrib
-    decorate: true
-    always_run: true
-    skip_report: false
-    spec:
-      containers:
-      - image: python:3.6
-        command: ["/bin/sh", "-c"]
-        args:
-        - pip install --upgrade pip setuptools wheel;
-          pip install -r requirements.txt;
-          pip install -r dev_tools/conf/pip-list-dev-tools.txt;
-          check/pytest --ignore=cirq/contrib
+  # TODO uncomment after test is fixed
+  # - name: pytest-and-incremental-coverage
+  #   decorate: true
+  #   always_run: true
+  #   skip_report: false
+  #   spec:
+  #     containers:
+  #     - image: python:3.5.2
+  #       command: ["/bin/sh", "-c"]
+  #       args:
+  #       - pip install --upgrade pip setuptools wheel;
+  #         pip install -r requirements.txt;
+  #         pip install -r cirq/contrib/contrib-requirements.txt;
+  #         pip install -r dev_tools/conf/pip-list-dev-tools.txt;
+  #         check/pytest-and-incremental-coverage master
+  # TODO uncomment after test is fixed
+  # - name: pytest-without-contrib
+  #   decorate: true
+  #   always_run: true
+  #   skip_report: false
+  #   spec:
+  #     containers:
+  #     - image: python:3.6
+  #       command: ["/bin/sh", "-c"]
+  #       args:
+  #       - pip install --upgrade pip setuptools wheel;
+  #         pip install -r requirements.txt;
+  #         pip install -r dev_tools/conf/pip-list-dev-tools.txt;
+  #         check/pytest --ignore=cirq/contrib
 
 
 branch-protection:
@@ -115,10 +118,11 @@ branch-protection:
           branches:
             master:
               protect: true
-          # required_status_checks:
-          #   contexts:
-          #   # TODO uncomment
-          #   - cla/google
+          required_status_checks:
+            contexts:
+            - "Travis CI - Pull Request"
+            # TODO uncomment
+            #- cla/google
 
             
 tide:
