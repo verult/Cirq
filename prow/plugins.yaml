@@ -9,3 +9,5 @@ config_updater:
       name: config
     prow/plugins.yaml:
       name: plugins
+    prow/jobs/**/*.yaml:
+      name: job-config
