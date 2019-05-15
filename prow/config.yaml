@@ -136,9 +136,8 @@ postsubmits:
     spec:
       containers:
       - image: gcr.io/k8s-prow/branchprotector:latest
-        imagePullPolicy: Always
         command:
-        - /branchprotector
+        - /app/prow/cmd/branchprotector/app.binary
         args:
         - --config-path=./prow/config.yaml
         - --github-token-path=/etc/oauth-token
