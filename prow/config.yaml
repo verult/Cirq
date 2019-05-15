@@ -140,7 +140,7 @@ postsubmits:
         - /app/prow/cmd/branchprotector/app.binary
         args:
         - --config-path=./prow/config.yaml
-        - --github-token-path=/etc/oauth-token
+        - --github-token-path=/etc/oauth-token/oauth
         - --confirm
         volumeMounts:
         - name: oauth-token
