@@ -42,6 +42,22 @@ deck:
 
 presubmits:
   verult-prowbot/Cirq:
+  - name: prow-checkconfig
+    branches:
+    - master
+    decorate: true
+    run_if_changed: "^prow/"
+    skip_report: false
+    spec:
+      containers:
+      - image: gcr.io/k8s-prow/checkconfig:latest
+        imagePullPolicy: Always
+        command:
+        - /checkconfig
+        args:
+        - --config-path=./prow/config.yaml
+        #- --job-config-path=./prow/prowjobs
+        - --plugin-config=./prow/plugins.yaml
   - name: mypy
     decorate: true
     always_run: true
@@ -108,6 +124,32 @@ presubmits:
   #         pip install -r requirements.txt;
   #         pip install -r dev_tools/conf/pip-list-dev-tools.txt;
   #         check/pytest --ignore=cirq/contrib
+
+
+postsubmits:
+  verult-prowbot/Cirq:
+  - name: prow-branchprotector
+    decorate: true
+    branches:
+    - master
+    spec:
+      containers:
+      - image: gcr.io/k8s-prow/branchprotector:latest
+        imagePullPolicy: Always
+        command:
+        - /branchprotector
+        args:
+        - --config-path=./prow/config.yaml
+        - --github-token-path=/etc/oauth-token
+        - --confirm
+        volumeMounts:
+        - name: oauth-token
+          mountPath: "/etc/oauth-token"
+          readOnly: true
+      volumes:
+      - name: oauth-token
+        secret:
+          secretName: oauth-token
 
 
 branch-protection:
