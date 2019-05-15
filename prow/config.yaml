@@ -46,7 +46,7 @@ presubmits:
     branches:
     - master
     decorate: true
-    run_if_changed: "^prow/"
+    run_if_changed: '^prow/'
     skip_report: false
     spec:
       containers:
@@ -130,6 +130,7 @@ postsubmits:
   verult-prowbot/Cirq:
   - name: prow-branchprotector
     decorate: true
+    run_if_changed: '^prow/config.yaml$'
     branches:
     - master
     spec:
