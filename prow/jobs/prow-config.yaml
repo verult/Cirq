@@ -19,7 +19,6 @@ presubmits:
         - --job-config-path=./prow/jobs
         - --plugin-config=./prow/plugins.yaml
 
-
 postsubmits:
   verult-prowbot/Cirq:
   - name: prow-branchprotector
